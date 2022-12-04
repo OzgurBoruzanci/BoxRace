@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Cube
   - Obstacle
+  - GameOver
   layers:
   - Default
   - TransparentFX

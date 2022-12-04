@@ -13,7 +13,7 @@ public class CharacterControl : MonoBehaviour
 
     Vector3 distanceBetween;
     
-    public GameObject player;
+    //public GameObject player;
     public GameObject cube;
     public GameObject symbolCube;
     public GameObject objeSymblCube;
@@ -46,7 +46,7 @@ public class CharacterControl : MonoBehaviour
             {
                 cubes[i].transform.parent = transform;
                 transform.GetChild(1).transform.position = new Vector3(transform.position.x, distance, transform.position.z);
-                transform.GetChild(0).transform.position = new Vector3(transform.position.x, transform.position.y + distance * 2, transform.position.z);
+                transform.GetChild(0).transform.position = new Vector3(transform.position.x, transform.GetChild(1).transform.position.y + distance, transform.position.z);
                 
             }
             if (transform.childCount > 1)
@@ -66,16 +66,37 @@ public class CharacterControl : MonoBehaviour
             
             GameObject symblCube= Instantiate(symbolCube);
             symblCubes.Add(symblCube);
-            for (int i = 2; i < symblCubes.Count; i++)
+            if (symblCubes.Count==1)
+            {
+                symblCubes[0].transform.parent = objeSymblCube.transform;
+                Destroy(symblCubes[0]);
+            }
+            else if (symblCubes.Count==2)
             {
                 Destroy(symblCubes[0]);
-                symblCubes[i].transform.parent = objeSymblCube.transform;
+                //symblCubes[0].transform.parent = objeSymblCube.transform;
                 symblCubes[1].transform.parent = objeSymblCube.transform;
-                symblCubes[1].transform.position = new Vector3(transform.position.x, distance, transform.position.z-0.25f);
-                float __ = symblCubes[i-1].transform.position.y + distance * 2;
-                symblCubes[i].transform.position = new Vector3(symblCubes[1].transform.position.x, __, symblCubes[1].transform.position.z);
+                symblCubes[1].transform.position = new Vector3(transform.position.x, distance, transform.position.z - 0.25f);
                 
             }
+            else if (symblCubes.Count>2)
+            {
+                for (int i = 2; i < symblCubes.Count; i++)
+                {
+                    Destroy(symblCubes[0]);
+                    symblCubes[i].transform.parent = objeSymblCube.transform;
+                    symblCubes[1].transform.parent = objeSymblCube.transform;
+                    symblCubes[1].transform.position = new Vector3(transform.position.x, distance, transform.position.z - 0.25f);
+                    float __ = symblCubes[i - 1].transform.position.y + distance * 2;
+                    symblCubes[i].transform.position = new Vector3(symblCubes[1].transform.position.x, __, symblCubes[1].transform.position.z);
+                   
+                }
+            }
+        }
+
+        if (other.gameObject.tag == "Finish")
+        {
+            Debug.Log(cubes.Count);
         }
 
     }
