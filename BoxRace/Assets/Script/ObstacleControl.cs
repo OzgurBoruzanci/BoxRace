@@ -20,8 +20,10 @@ public class ObstacleControl : MonoBehaviour
         {
             characterControl.cubes.Remove(other.gameObject);
             Destroy(other.gameObject);
-            //Debug.Log(characterControl.cubes.Count);
-
+        }
+        if (other.gameObject.tag=="Player")
+        {
+            characterControl.GameOver();
         }
     }
 

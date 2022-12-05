@@ -1,15 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 
 public class CharacterControl : MonoBehaviour
 {
     public List<GameObject> cubes;
-    List<GameObject> symblCubes;
+    public List<GameObject> symblCubes;
+    int nextScene = 0;
     float horizontal = 0;
-    float distance = 0;
+    float menuTime=0;
+    float gameOverCounter = 0;
+    public float distance = 0;
 
     Vector3 distanceBetween;
     
@@ -18,12 +23,17 @@ public class CharacterControl : MonoBehaviour
     public GameObject symbolCube;
     public GameObject objeSymblCube;
     public GameObject plane;
+    public Text gameOverText;
+    public Text nextLevelText;
+    GameObject symblCube;
+    public bool gameOverControl = false;
+    public bool nextLevelControl = false;
 
-    
 
     void Start()
     {
-        distance= cube.transform.position.y - plane.transform.position.y;
+        Time.timeScale = 1;
+        distance = cube.transform.position.y - plane.transform.position.y;
         //Debug.Log(distance + "   iki katı  ==" + distance * 2);
         
         cubes =new List<GameObject>();
@@ -38,25 +48,26 @@ public class CharacterControl : MonoBehaviour
         if (other.gameObject.tag == "Cube")
         {
             GameObject obje = other.gameObject;
-            if (cubes.Contains(other.gameObject)==false)
+            if (cubes.Contains(other.gameObject) == false)
             {
                 cubes.Add(obje);
-            }
-            for (int i = 0; i < cubes.Count; i++)
-            {
-                cubes[i].transform.parent = transform;
-                transform.GetChild(1).transform.position = new Vector3(transform.position.x, distance, transform.position.z);
-                transform.GetChild(0).transform.position = new Vector3(transform.position.x, transform.GetChild(1).transform.position.y + distance, transform.position.z);
-                
-            }
-            if (transform.childCount > 1)
-            {
-                for (int i = 2; i < transform.childCount; i++)
-                {
 
-                    float _ = transform.GetChild(i - 1).transform.position.y + distance * 2;
-                    transform.GetChild(i).transform.position = new Vector3(transform.position.x, _, transform.position.z);
-                    transform.GetChild(0).transform.position = new Vector3(transform.position.x, distance * 2 * i, transform.position.z);
+                for (int i = 0; i < cubes.Count; i++)
+                {
+                    cubes[i].transform.parent = transform;
+                    transform.GetChild(1).transform.position = new Vector3(transform.position.x, distance, transform.position.z);
+                    transform.GetChild(0).transform.position = new Vector3(transform.position.x, transform.GetChild(1).transform.position.y + distance - 0.1f, transform.position.z);
+
+                }
+                if (transform.childCount > 1)
+                {
+                    for (int i = 2; i < transform.childCount; i++)
+                    {
+
+                        float _ = transform.GetChild(i - 1).transform.position.y + distance * 2;
+                        transform.GetChild(i).transform.position = new Vector3(transform.position.x, _, transform.position.z);
+                        transform.GetChild(0).transform.position = new Vector3(transform.position.x, (distance * 2*i) - 0.1f, transform.position.z);
+                    }
                 }
             }
         }
@@ -64,7 +75,7 @@ public class CharacterControl : MonoBehaviour
         if (other.gameObject.tag == "Obstacle")
         {
             
-            GameObject symblCube= Instantiate(symbolCube);
+            symblCube= Instantiate(symbolCube);
             symblCubes.Add(symblCube);
             if (symblCubes.Count==1)
             {
@@ -94,9 +105,10 @@ public class CharacterControl : MonoBehaviour
             }
         }
 
-        if (other.gameObject.tag == "Finish")
+
+        if (other.gameObject.tag == "NextLevel")
         {
-            Debug.Log(cubes.Count);
+            NextLevel();
         }
 
     }
@@ -106,17 +118,17 @@ public class CharacterControl : MonoBehaviour
         {
             if (cubes.Count == 0)
             {
-                transform.GetChild(0).transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+                transform.GetChild(0).transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
             }
             else if (cubes.Count == 1)
             {
                 transform.GetChild(1).transform.position = new Vector3(transform.position.x,distance,transform.position.z);
-                transform.GetChild(0).transform.position = new Vector3(transform.position.x, distance * 2, transform.position.z);
+                transform.GetChild(0).transform.position = new Vector3(transform.position.x, (distance*2) - 0.1f, transform.position.z);
             }
             else if(cubes.Count > 1)
             {
                 transform.GetChild(1).transform.position = new Vector3(transform.position.x, distance, transform.position.z);
-                transform.GetChild(0).transform.position = new Vector3(transform.position.x, distance * 2, transform.position.z);
+                transform.GetChild(0).transform.position = new Vector3(transform.position.x, (distance * 2) - 0.1f, transform.position.z);
 
                 if (transform.childCount > 1)
                 {
@@ -125,12 +137,28 @@ public class CharacterControl : MonoBehaviour
 
                         float _ = transform.GetChild(i - 1).transform.position.y + distance * 2;
                         transform.GetChild(i).transform.position = new Vector3(transform.position.x, _, transform.position.z);
-                        transform.GetChild(0).transform.position = new Vector3(transform.position.x, distance * 2 * i, transform.position.z);
+                        transform.GetChild(0).transform.position = new Vector3(transform.position.x, (distance * 2*i) - 0.1f, transform.position.z);
                     }
                 }
 
             }
             symblCubes.Clear();
+        }
+        if (other.gameObject.tag == "Finish")
+        {
+            if (cubes.Count>0)
+            {
+                for (int i = 0; i < transform.childCount; i++)
+                {
+                    transform.GetChild(i).transform.position = new Vector3(transform.GetChild(i).transform.position.x, transform.GetChild(i).transform.position.y - distance, transform.GetChild(i).transform.position.z);
+                }
+
+            }
+            else
+            {
+                transform.GetChild(0).transform.position=new Vector3(transform.GetChild(0).transform.position.x, -0.1f,transform.GetChild(0).transform.position.z);
+            }
+            
         }
 
     }
@@ -142,12 +170,47 @@ public class CharacterControl : MonoBehaviour
     }
     void Update()
     {
-        MoveControl();
+        if (gameOverControl==false)
+        {
+            MoveControl();
+        }
+        
 
     }
+    private void FixedUpdate()
+    {
+        if (gameOverControl == true)
+        {
+            Time.timeScale = 0.4f;
+            gameOverCounter += 0.01f;
+            gameOverText.text = "GAME OVER";
+            menuTime += Time.deltaTime;
+            if (menuTime > 1.3f)
+            {
+                SceneManager.LoadScene("Menu");
+            }
+        }
+        if (nextLevelControl==true)
+        {
+            Time.timeScale = 0.4f;
+            menuTime += Time.deltaTime;
+            nextLevelText.text = "COMPLETED";
+            if (menuTime>1.3f)
+            {
+                nextScene = int.Parse(SceneManager.GetActiveScene().name) + 1;
+                if (nextScene != 4)
+                {
+                    SceneManager.LoadScene($"{nextScene}");
+                }
+                else if (nextScene == 4)
+                {
+                    SceneManager.LoadScene("Menu");
+                }
+            }
+        }
+    }
 
-    
-    
+
     void MoveControl()
     {
         horizontal = Input.GetAxis("Horizontal");
@@ -160,6 +223,15 @@ public class CharacterControl : MonoBehaviour
     void CameraControl()
     {
         Camera.main.transform.position = transform.position - distanceBetween;
+    }
+
+    public void GameOver()
+    {
+        gameOverControl = true;
+    }
+    public void NextLevel()
+    {
+        nextLevelControl = true;
     }
 }
 
