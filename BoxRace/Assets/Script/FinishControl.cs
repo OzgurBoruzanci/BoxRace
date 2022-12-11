@@ -13,7 +13,7 @@ public class FinishControl : MonoBehaviour
     {
         characterControl = player.GetComponent<CharacterControl>();
     }
-   
+
 
 
     private void OnTriggerExit(Collider other)
@@ -22,21 +22,23 @@ public class FinishControl : MonoBehaviour
         {
             characterControl.cubes.Remove(other.gameObject);
             Destroy(other.gameObject);
-            
+
             GameObject symblCube = Instantiate(characterControl.symbolCube);
             characterControl.symblCubes.Add(symblCube);
             //characterControl.symblCubes[0].transform.parent = characterControl.objeSymblCube.transform;
             characterControl.symblCubes[0].transform.parent = characterControl.objeSymblCube.transform;
-            characterControl.symblCubes[0].transform.position = new Vector3(characterControl.transform.position.x, characterControl.distance, characterControl.transform.position.z-0.2f);
-            
+            characterControl.symblCubes[0].transform.position = new Vector3(characterControl.transform.position.x, characterControl.distance, characterControl.transform.position.z - 0.5f);
+
             //Destroy(characterControl.symblCubes[0]);
             characterControl.symblCubes.Clear();
         }
-        if (other.gameObject.tag=="Player")
+        if (other.gameObject.tag == "Player")
         {
             //characterControl.GameOver();
             characterControl.NextLevel();
         }
     }
+
+
 
 }

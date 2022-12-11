@@ -14,10 +14,14 @@ public class CharacterControl : MonoBehaviour
     float horizontal = 0;
     float menuTime=0;
     float gameOverCounter = 0;
+    float cameraPositionFloat=0;
+    float planeWidth = 0;
+    float planeLenght = 0;
     public float distance = 0;
 
     Vector3 distanceBetween;
-    
+    Vector3 cameraPosition;
+
     //public GameObject player;
     public GameObject cube;
     public GameObject symbolCube;
@@ -30,17 +34,21 @@ public class CharacterControl : MonoBehaviour
     public bool nextLevelControl = false;
 
 
+
     void Start()
     {
         Time.timeScale = 1;
         distance = cube.transform.position.y - plane.transform.position.y;
         //Debug.Log(distance + "   iki katı  ==" + distance * 2);
-        
         cubes =new List<GameObject>();
         symblCubes =new List<GameObject>();
+        planeWidth = plane.GetComponent<Collider>().bounds.size.x/2;
+        planeLenght=plane.GetComponent<Collider>().bounds.size.z/2;
        
         distanceBetween = transform.position - Camera.main.transform.position;
     }
+
+
 
 
     private void OnTriggerEnter(Collider other)
@@ -51,7 +59,7 @@ public class CharacterControl : MonoBehaviour
             if (cubes.Contains(other.gameObject) == false)
             {
                 cubes.Add(obje);
-
+                
                 for (int i = 0; i < cubes.Count; i++)
                 {
                     cubes[i].transform.parent = transform;
@@ -167,16 +175,25 @@ public class CharacterControl : MonoBehaviour
     private void LateUpdate()
     {
         CameraControl();
+        MoveControl();
     }
     void Update()
     {
-        if (gameOverControl==false)
+        if (Input.GetMouseButton(0))
         {
-            MoveControl();
+            MouseControl();
         }
         
 
+        //if (gameOverControl==false)
+        //{
+        //    KeyControl();
+        //}
+
     }
+
+
+
     private void FixedUpdate()
     {
         if (gameOverControl == true)
@@ -209,20 +226,40 @@ public class CharacterControl : MonoBehaviour
             }
         }
     }
-
-
     void MoveControl()
     {
+        Vector3 viewPos = transform.position;
+        viewPos.x = Mathf.Clamp(viewPos.x, (-planeWidth), planeWidth);
+        viewPos.z = Mathf.Clamp(viewPos.z, (-planeLenght), planeLenght);
+        //viewPos.y = Mathf.Clamp(viewPos.y, 0, 50);
+        transform.position = viewPos;
+    }
+    
+    void MouseControl()
+    {
+        horizontal = Input.GetAxis("Mouse X");
+        Vector3 vec = new Vector3(horizontal, 0, 1.7f);
+        vec = transform.TransformDirection(vec);
+        vec.Normalize();
+        transform.position += vec * Time.deltaTime * 5;
+    }
+    void KeyControl()
+    {
+        
         horizontal = Input.GetAxis("Horizontal");
         Vector3 vec = new Vector3(horizontal, 0, 1.5f);
         vec = transform.TransformDirection(vec);
         vec.Normalize();
         transform.position += vec * Time.deltaTime * 4;
+        
     }
 
     void CameraControl()
     {
-        Camera.main.transform.position = transform.position - distanceBetween;
+        cameraPositionFloat = (float)cubes.Count / 5;
+        cameraPosition = new Vector3(distanceBetween.x, distanceBetween.y - cameraPositionFloat, distanceBetween.z + cameraPositionFloat);
+        Camera.main.transform.position = transform.position - cameraPosition;
+        
     }
 
     public void GameOver()
