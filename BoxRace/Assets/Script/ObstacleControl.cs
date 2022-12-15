@@ -4,26 +4,27 @@ using UnityEngine;
 
 public class ObstacleControl : MonoBehaviour
 {
-    CharacterControl characterControl;
+    Mechanical mechanical;
     public GameObject player;
 
     private void Start()
     {
-        characterControl = player.GetComponent<CharacterControl>();
-       
+        mechanical = player.GetComponent<Mechanical>();
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
 
-        if (other.gameObject.tag == "Cube")
+        if (other.gameObject.tag == "Box")
         {
-            characterControl.cubes.Remove(other.gameObject);
-            Destroy(other.gameObject);
+            mechanical.boxs.Remove(other.gameObject);
+            //Destroy(other.gameObject);
         }
+        
         if (other.gameObject.tag=="Player")
         {
-            characterControl.GameOver();
+            mechanical.GameOver();
         }
     }
 

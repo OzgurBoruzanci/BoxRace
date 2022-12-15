@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 3112104696919921065}
   - component: {fileID: 3112104696919921068}
   - component: {fileID: 3112104696919921070}
+  - component: {fileID: 1744464920418620710}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -90,14 +91,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 678aac24bce94364895e0a2b79dce07d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cubes: []
-  symblCubes: []
+  boxs: []
   distance: 0
-  cube: {fileID: 4723941976267435917, guid: 39294576b1650744893ebc2643f41db1, type: 3}
-  symbolCube: {fileID: 1734995446900626411, guid: ba76ede355c48454082b50a5f4e22a66,
-    type: 3}
-  objeSymblCube: {fileID: 8278339375759444799, guid: 78b7e24ec98a05049b590b3f0a919342,
-    type: 3}
+  box: {fileID: 0}
   plane: {fileID: 4196838110174545615, guid: 2dc655077c578e9469815c4d5463d003, type: 3}
   gameOverText: {fileID: 0}
   nextLevelText: {fileID: 0}
@@ -117,6 +113,18 @@ CapsuleCollider:
   m_Height: 1.3729239
   m_Direction: 1
   m_Center: {x: 0, y: 0.79773057, z: -0.012083501}
+--- !u!114 &1744464920418620710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3112104696919921058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70d4285b5a872b74a8a5154288398a40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1607693127714956839
 PrefabInstance:
   m_ObjectHideFlags: 0
