@@ -24,132 +24,55 @@ public class Mechanical : MonoBehaviour
 
     }
 
+    
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Box")
+        if (other.gameObject.tag=="Box")
         {
-            GameObject obje = other.gameObject;
+            GameObject objectbox = other.gameObject;
             if (boxs.Contains(other.gameObject) == false)
             {
-                boxs.Add(obje);
+                boxs.Add(objectbox);
+                objectbox.transform.SetParent(transform);
+
                 for (int i = 0; i < boxs.Count; i++)
                 {
-                    boxs[i].transform.parent = transform;
-                    transform.GetChild(1).transform.position = new Vector3(transform.position.x, distance, transform.position.z);
-                    transform.GetChild(0).transform.position = new Vector3(transform.position.x, transform.GetChild(1).transform.position.y + distance - 0.1f, transform.position.z);
-
-                }
-                if (transform.childCount > 1)
-                {
-                    for (int i = 2; i < transform.childCount; i++)
-                    {
-
-                        float _ = transform.GetChild(i - 1).transform.position.y + distance * 2;
-                        transform.GetChild(i).transform.position = new Vector3(transform.position.x, _, transform.position.z);
-                        transform.GetChild(0).transform.position = new Vector3(transform.position.x, (distance * 2 * i) - 0.1f, transform.position.z);
-                    }
+                    boxs[i].transform.localPosition = new Vector3(0, i + 0.55f, 0.5f);
+                    transform.GetChild(0).transform.localPosition = new Vector3(0, boxs.Count, 0.5f);
                 }
             }
 
         }
-        
-
-        if (other.gameObject.tag == "Obstacle")
-        {
-            //transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 0.4f);
-
-            //symblCube = Instantiate(symbolCube);
-            //symblCubes.Add(symblCube);
-            //if (symblCubes.Count == 1)
-            //{
-            //    symblCubes[0].transform.parent = objeSymblCube.transform;
-            //    Destroy(symblCubes[0]);
-            //}
-            //else if (symblCubes.Count == 2)
-            //{
-            //    Destroy(symblCubes[0]);
-            //    //symblCubes[0].transform.parent = objeSymblCube.transform;
-            //    symblCubes[1].transform.parent = objeSymblCube.transform;
-            //    symblCubes[1].transform.position = new Vector3(transform.position.x, distance, transform.position.z - 0.25f);
-
-            //}
-            //else if (symblCubes.Count > 2)
-            //{
-            //    for (int i = 2; i < symblCubes.Count; i++)
-            //    {
-            //        Destroy(symblCubes[0]);
-            //        symblCubes[i].transform.parent = objeSymblCube.transform;
-            //        symblCubes[1].transform.parent = objeSymblCube.transform;
-            //        symblCubes[1].transform.position = new Vector3(transform.position.x, distance, transform.position.z - 0.25f);
-            //        float __ = symblCubes[i - 1].transform.position.y + distance * 2;
-            //        symblCubes[i].transform.position = new Vector3(symblCubes[1].transform.position.x, __, symblCubes[1].transform.position.z);
-
-            //    }
-            //}
-        }
-
-
-        //if (other.gameObject.tag == "NextLevel")
-        //{
-        //    NextLevel();
-        //}
-
     }
+
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Obstacle")
+        if (other.gameObject.tag=="Obstacle")
         {
-            if (boxs.Count == 0)
+            if (boxs.Count!=0)
             {
-                transform.GetChild(0).transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-            }
-            else if (boxs.Count == 1)
-            {
-                transform.GetChild(1).transform.position = new Vector3(transform.position.x, distance, transform.position.z);
-                transform.GetChild(0).transform.position = new Vector3(transform.position.x, (distance * 2) - 0.1f, transform.position.z);
-            }
-            else if (boxs.Count > 1)
-            {
-                transform.GetChild(1).transform.position = new Vector3(transform.position.x, distance, transform.position.z);
-                transform.GetChild(0).transform.position = new Vector3(transform.position.x, (distance * 2) - 0.1f, transform.position.z);
-
-                if (transform.childCount > 1)
+                for (int i = 0; i < boxs.Count; i++)
                 {
-                    for (int i = 2; i < transform.childCount; i++)
-                    {
+                    boxs[i].transform.localPosition = new Vector3(0, 0.55f + i, 0.5f);
+                    transform.GetChild(0).transform.localPosition = new Vector3(0, boxs.Count, 0.5f);
 
-                        float _ = transform.GetChild(i - 1).transform.position.y + distance * 2;
-                        transform.GetChild(i).transform.position = new Vector3(transform.position.x, _, transform.position.z);
-                        transform.GetChild(0).transform.position = new Vector3(transform.position.x, (distance * 2 * i) - 0.1f, transform.position.z);
-                    }
                 }
-
-            }
-            //symblCubes.Clear();
-        }
-        if (other.gameObject.tag == "Finish")
-        {
-            if (boxs.Count > 0)
-            {
-                for (int i = 0; i < transform.childCount; i++)
-                {
-                    transform.GetChild(i).transform.position = new Vector3(transform.GetChild(i).transform.position.x, transform.GetChild(i).transform.position.y - distance, transform.GetChild(i).transform.position.z);
-                }
-
             }
             else
             {
-                transform.GetChild(0).transform.position = new Vector3(transform.GetChild(0).transform.position.x, -0.1f, transform.GetChild(0).transform.position.z);
+                transform.GetChild(0).transform.localPosition = new Vector3(0, 0, 0.5f);
             }
-
+            
         }
-        if (other.gameObject.tag=="NextLevel")
+        
+        if (other.gameObject.tag == "NextLevel")
         {
             NextLevel();
         }
 
     }
+
 
     public void GameOver()
     {

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 
 public class CameraControl : MonoBehaviour
 {
@@ -18,7 +19,8 @@ public class CameraControl : MonoBehaviour
     
     void LateUpdate()
     {
-        cameraPositionFloat = (float)mechanical.boxs.Count / 5;
+        //Debug.Log(mechanical.boxs.Count);
+        cameraPositionFloat = (float)mechanical.boxs.Count / 2;
         cameraPosition = new Vector3(distanceBetween.x, distanceBetween.y - cameraPositionFloat,distanceBetween.z + cameraPositionFloat);
         Camera.main.transform.position = mechanical.transform.position - cameraPosition;
     }

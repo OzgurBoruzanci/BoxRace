@@ -15,17 +15,18 @@ public class ObstacleControl : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-
-        if (other.gameObject.tag == "Box")
-        {
-            mechanical.boxs.Remove(other.gameObject);
-            //Destroy(other.gameObject);
-        }
         
+        if (other.gameObject.tag=="Box")
+        {
+            //mechanical.boxs.Remove(other.gameObject);
+        }
+
         if (other.gameObject.tag=="Player")
         {
             mechanical.GameOver();
+            
         }
     }
+
 
 }

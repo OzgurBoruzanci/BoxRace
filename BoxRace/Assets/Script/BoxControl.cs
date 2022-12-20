@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -21,8 +22,12 @@ public class BoxControl : MonoBehaviour
         {
             transform.parent = null;
             this.gameObject.tag = "SymbolBox";
-            transform.position=new Vector3(transform.position.x,transform.position.y,other.transform.position.z-0.325f);
+            transform.position = new Vector3(transform.position.x, transform.position.y, other.transform.position.z - 0.55f);
+            GameObject.FindObjectOfType<Mechanical>().boxs.Remove(this.gameObject);
         }
         
+
     }
+
+
 }

@@ -11,8 +11,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.25, y: 1, z: 0.25}
-  m_Center: {x: 0, y: 0.7, z: 0.1}
+  m_Size: {x: 0.25, y: 1.57, z: 0.25}
+  m_Center: {x: 0, y: 0.97, z: 0.29}
 --- !u!1 &3112104696919921058
 GameObject:
   m_ObjectHideFlags: 0
@@ -23,7 +23,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3112104696919921069}
   - component: {fileID: 3112104696919921071}
-  - component: {fileID: 3112104696919921065}
   - component: {fileID: 3112104696919921068}
   - component: {fileID: 3112104696919921070}
   - component: {fileID: 1744464920418620710}
@@ -61,24 +60,10 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &3112104696919921065
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3112104696919921058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3a8ff696e491e645994710382305264, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cube: {fileID: 4723941976267435917, guid: 39294576b1650744893ebc2643f41db1, type: 3}
-  cubes: {fileID: 7048902872584949808, guid: c42c539031ab0984c84132f3a69c56d7, type: 3}
 --- !u!114 &3112104696919921068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91,14 +76,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 678aac24bce94364895e0a2b79dce07d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxs: []
-  distance: 0
-  box: {fileID: 0}
-  plane: {fileID: 4196838110174545615, guid: 2dc655077c578e9469815c4d5463d003, type: 3}
-  gameOverText: {fileID: 0}
-  nextLevelText: {fileID: 0}
-  gameOverControl: 0
-  nextLevelControl: 0
+  place: {fileID: 0}
+  speed: 1.7
 --- !u!136 &3112104696919921070
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -110,9 +89,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.13464281
-  m_Height: 1.3729239
+  m_Height: 2.04
   m_Direction: 1
-  m_Center: {x: 0, y: 0.79773057, z: -0.012083501}
+  m_Center: {x: 0, y: 1.13, z: -0.012083501}
 --- !u!114 &1744464920418620710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,6 +104,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70d4285b5a872b74a8a5154288398a40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelController: {fileID: 0}
+  boxs: []
+  distance: 0
+  box: {fileID: 0}
+  place: {fileID: 0}
 --- !u!1001 &1607693127714956839
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -140,17 +124,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 16ccf834a07c5664ba19bd59c90f6706,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.8
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 16ccf834a07c5664ba19bd59c90f6706,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.8
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 16ccf834a07c5664ba19bd59c90f6706,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.8
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 16ccf834a07c5664ba19bd59c90f6706,
         type: 3}
@@ -206,6 +190,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Y Bot
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 16ccf834a07c5664ba19bd59c90f6706,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 16ccf834a07c5664ba19bd59c90f6706,
         type: 3}
