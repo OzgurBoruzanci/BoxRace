@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 7860628359461736604}
   - component: {fileID: 5084765947803130253}
   - component: {fileID: 3314632300372333904}
+  - component: {fileID: 3584616079757223534}
+  - component: {fileID: 4725427023903787438}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -79,6 +81,32 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &3584616079757223534
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848680110117565045}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 0.99999994}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4725427023903787438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848680110117565045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b74c7c556d459724d8df62e8f685d4d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacleBool: 1
 --- !u!1 &2470541338943508816
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,6 +118,8 @@ GameObject:
   - component: {fileID: 6258671521883103792}
   - component: {fileID: 3463903854574811831}
   - component: {fileID: 647024471925043673}
+  - component: {fileID: 3323572200206310277}
+  - component: {fileID: 4065192373766780847}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -158,6 +188,32 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &3323572200206310277
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2470541338943508816}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 0.99999994}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4065192373766780847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2470541338943508816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b74c7c556d459724d8df62e8f685d4d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacleBool: 1
 --- !u!1 &8685352517102345668
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,7 +258,7 @@ BoxCollider:
   m_GameObject: {fileID: 8685352517102345668}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 4.9713993, y: 0.84596777, z: 0.04215768}
   m_Center: {x: 0.004553318, y: 0.47681022, z: -0.06849064}
@@ -213,7 +269,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8685352517102345668}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ae3ec900a313de45a444a423051c10a, type: 3}
   m_Name: 
@@ -228,7 +284,7 @@ BoxCollider:
   m_GameObject: {fileID: 8685352517102345668}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 4.9668427, y: 0.77879286, z: 0.033727914}
   m_Center: {x: 0.015668869, y: 2.5075953, z: -0.07270552}
