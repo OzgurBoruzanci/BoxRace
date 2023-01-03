@@ -41,9 +41,9 @@ public class CharacterMoveRb : MonoBehaviour
     void MouseControl()
     {
         horizontal = Input.GetAxis("Mouse X");
-        Vector3 vec = new Vector3(horizontal, 0, 1.7f);
+        Vector3 vec = new Vector3(horizontal, 0, 1.5f);
         vec = transform.TransformDirection(vec);
         vec.Normalize();
-        transform.position += vec * Time.deltaTime*5f;
+        transform.position += vec * Time.deltaTime * 5f;
     }
 }

@@ -16,12 +16,12 @@ public class ObstacleRb : MonoBehaviour
     {
         
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag=="Box" && GameObject.FindObjectOfType<BoxRb>().collectable == true)
-        {
-            GameObject.FindObjectOfType<BoxRb>().transform.parent = null;
-            obstacleBool = false;
-        }
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.tag == "Box" && GameObject.FindObjectOfType<BoxRb>().collectable == false)
+    //    {
+    //        GameObject.FindObjectOfType<BoxRb>().transform.parent = null;
+    //        //obstacleBool = false;
+    //    }
+    //}
 }

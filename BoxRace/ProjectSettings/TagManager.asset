@@ -9,6 +9,7 @@ TagManager:
   - NextLevel
   - Box
   - SymbolBox
+  - PlayerBoxTag
   layers:
   - Default
   - TransparentFX

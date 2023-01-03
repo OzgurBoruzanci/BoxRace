@@ -19,7 +19,7 @@ public class CameraRb : MonoBehaviour
     void LateUpdate()
     {
         //Debug.Log(characterRg.boxsRb.Count);
-        cameraPositionFloat = (float)characterRg.boxsRb.Count / 2;
+        cameraPositionFloat = (float)characterRg.boxsRb.Count / 20;
         cameraPosition = new Vector3(distanceBetween.x, distanceBetween.y - cameraPositionFloat,distanceBetween.z + cameraPositionFloat);
         Camera.main.transform.position = characterRg.transform.position - cameraPosition;
     }

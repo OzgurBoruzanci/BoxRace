@@ -17,15 +17,18 @@ public class BoxRb : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag=="Player" && collectable == true)
+        if (collision.transform.GetComponent<BoxRb>() && collectable == true)
         {
-            transform.parent = collision.gameObject.transform.parent;
+            transform.parent = collision.gameObject.transform;
+            //Debug.Log(transform.parent.name);
             GameObject.FindObjectOfType<CharacterRg>().boxsRb.Add(this.gameObject);
             collectable = false;
         }
-        if (collision.gameObject.tag=="Obstacle")
+        if (collision.gameObject.tag == "Obstacle" /*&& GameObject.FindObjectOfType<ObstacleRb>().obstacleBool == true*/)
         {
-            transform.parent = null;
+            gameObject.transform.parent = null;
+            //GameObject.FindObjectOfType<ObstacleRb>().obstacleBool = false;
+            //Debug.Log(GameObject.FindObjectOfType<ObstacleRb>().obstacleBool);
         }
     }
 }
