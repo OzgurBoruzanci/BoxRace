@@ -22,9 +22,9 @@ public class CharacterRg : MonoBehaviour
         {
             for (int i = 0; i < boxsRb.Count; i++)
             {
-                boxsRb[i].transform.localPosition = new Vector3( 0, (0.5f + i), 0);
-                transform.GetChild(0).localPosition = new Vector3(0, (1 + i), 0);
-                //Debug.Log(boxsRb.Count);
+                boxsRb[i].transform.localPosition = new Vector3( 0, (- i), 0);
+                transform.localPosition = new Vector3(0, (1+ i), 0);
+                Debug.Log(boxsRb.Count);
             }
         }
     }
