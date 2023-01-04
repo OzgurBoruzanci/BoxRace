@@ -5,9 +5,11 @@ using UnityEngine;
 public class CharacterController : MonoBehaviour
 {
     public List<GameObject> boxs;
+    GameController gameController;
     void Start()
     {
         boxs = new List<GameObject>();
+        gameController = FindObjectOfType<GameController>();
     }
 
     
@@ -31,11 +33,15 @@ public class CharacterController : MonoBehaviour
             Debug.Log(boxs.Count);
         }
     }
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (collision.transform.GetComponent<BoxController>())
-    //    {
-    //        collision.transform.GetComponent<BoxController>().canCollectable = true;
-    //    }
-    //}
+    private void OnCollisionEnter(Collision collision)
+    {
+        //if (collision.transform.GetComponent<ObstacleController>() && collision.transform.GetComponent<ObstacleController>().obstacleActive)
+        //{
+        //    gameController.GameOver();
+        //}
+        if (collision.gameObject.tag=="NextLevel")
+        {
+            gameController.NextLevel();
+        }
+    }
 }

@@ -6,30 +6,30 @@ using UnityEngine.SceneManagement;
 
 public class FinishControl : MonoBehaviour
 {
-    CharacterControl characterControl;
-    public GameObject player;
-    Mechanical mechanical;
+    GameController gameController;
+    bool canCollision=true;
     
     void Start()
     {
-        characterControl = player.GetComponent<CharacterControl>();
-        mechanical = player.GetComponent<Mechanical>();
-        
+        gameController = FindObjectOfType<GameController>();
     }
 
 
 
-    private void OnTriggerExit(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.gameObject.tag == "Box")
+        if (collision.transform.GetComponent<BoxController>() && canCollision)
         {
-            other.gameObject.transform.parent = null;
-            other.gameObject.transform.position= new Vector3(characterControl.transform.position.x, mechanical.distance, characterControl.transform.position.z - 0.5f);
+            collision.transform.GetComponent<BoxController>().Removed(collision.gameObject);
+            canCollision = false;
+            //other.gameObject.transform.position= new Vector3(characterControl.transform.position.x, mechanical.distance, characterControl.transform.position.z - 0.5f);
         }
-        if (other.gameObject.tag=="Player")
+        if (collision.transform.GetComponent<CharacterController>() && canCollision)
         {
-            mechanical.NextLevel();
-            characterControl.speed = 0.5f;
+            Debug.Log(collision.gameObject.tag);
+            gameController.NextLevel();
+            Time.timeScale = 0;
+            //characterControl.speed = 0.5f;
         }
     }
 

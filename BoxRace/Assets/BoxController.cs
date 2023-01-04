@@ -6,10 +6,12 @@ public class BoxController : MonoBehaviour
 {
     public bool canCollectable=true;
     //public GameObject player;
+    GameController gameController;
     CharacterController characterController;
     void Start()
     {
         characterController=FindObjectOfType<CharacterController>();
+        gameController = FindObjectOfType<GameController>();
     }
 
     
@@ -41,6 +43,10 @@ public class BoxController : MonoBehaviour
         if (collision.transform.GetComponent<ObstacleController>() && collision.transform.GetComponent<ObstacleController>().obstacleActive==true)
         {
             Removed(this.gameObject);
+        }
+        if (collision.gameObject.tag == "NextLevel")
+        {
+            gameController.NextLevel();
         }
     }
 }
