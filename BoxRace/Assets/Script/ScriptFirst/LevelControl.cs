@@ -10,14 +10,17 @@ public class LevelControl : MonoBehaviour
 
     public bool gameOverControl = false;
     public bool nextLevelControl = false;
+    public Text levelText;
     public Text gameOverText;
     public Text nextLevelText;
     float menuTime = 0;
     float gameOverCounter = 0;
     int nextScene = 0;
+    CharacterMoveController moveController;
     void Start()
     {
-        
+        levelText.text = "Level " + SceneManager.GetActiveScene().name;
+        moveController=FindObjectOfType<CharacterMoveController>();
     }
 
     
@@ -30,10 +33,11 @@ public class LevelControl : MonoBehaviour
     {
         if (gameOverControl == true)
         {
-            Time.timeScale = 0.0f;
+            moveController.speed = 0;
             gameOverCounter += 0.01f;
             gameOverText.text = "GAME OVER";
             menuTime += Time.deltaTime;
+            Debug.Log(menuTime);
             if (menuTime > 1.3f)
             {
                 SceneManager.LoadScene("Menu");

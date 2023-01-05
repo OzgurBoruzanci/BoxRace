@@ -22,14 +22,11 @@ public class FinishControl : MonoBehaviour
         {
             collision.transform.GetComponent<BoxController>().Removed(collision.gameObject);
             canCollision = false;
-            //other.gameObject.transform.position= new Vector3(characterControl.transform.position.x, mechanical.distance, characterControl.transform.position.z - 0.5f);
         }
         if (collision.transform.GetComponent<CharacterController>() && canCollision)
         {
-            Debug.Log(collision.gameObject.tag);
             gameController.NextLevel();
-            Time.timeScale = 0;
-            //characterControl.speed = 0.5f;
+            collision.transform.parent.transform.GetComponent<CharacterMoveController>().speed = 0.1f;
         }
     }
 

@@ -5,8 +5,8 @@ using UnityEngine;
 public class CharacterMoveController : MonoBehaviour
 {
     float horizontal = 0;
-
     float placeWidth = 2;
+    public float speed = 1.5f;
     //float placeLenght = 40;
 
     //public GameObject place;
@@ -41,7 +41,7 @@ public class CharacterMoveController : MonoBehaviour
     void MouseControl()
     {
         horizontal = Input.GetAxis("Mouse X");
-        Vector3 vec = new Vector3(horizontal, 0, 1.5f);
+        Vector3 vec = new Vector3(horizontal, 0, speed);
         vec = transform.TransformDirection(vec);
         vec.Normalize();
         transform.position += vec * Time.deltaTime * 5f;

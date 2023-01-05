@@ -47,9 +47,6 @@ public class BoxController : MonoBehaviour
         {
             Removed(this.gameObject);
         }
-        if (collision.gameObject.tag == "NextLevel")
-        {
-            gameController.NextLevel();
-        }
+        
     }
 }

@@ -30,18 +30,18 @@ public class CharacterController : MonoBehaviour
         {
             boxs[i].transform.localPosition = new Vector3(0, (0.5f + i), 0);
             transform.localPosition = new Vector3(0, (1.5f + i), 0);
-            Debug.Log(boxs.Count);
         }
     }
     private void OnCollisionEnter(Collision collision)
     {
-        //if (collision.transform.GetComponent<ObstacleController>() && collision.transform.GetComponent<ObstacleController>().obstacleActive)
-        //{
-        //    gameController.GameOver();
-        //}
         if (collision.gameObject.tag=="NextLevel")
         {
             gameController.NextLevel();
+            this.transform.parent.transform.GetComponent<CharacterMoveController>().speed = 0.01f;
+        }
+        if (collision.transform.GetComponent<ObstacleController>() && collision.transform.GetComponent<ObstacleController>().obstacleActive)
+        {
+            gameController.GameOver();
         }
     }
 }

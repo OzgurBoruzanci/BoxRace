@@ -5,10 +5,10 @@ using UnityEngine;
 public class ObstacleController : MonoBehaviour
 {
     public bool obstacleActive=true;
-    GameController gameController;
+    
     void Start()
     {
-        gameController = FindObjectOfType<GameController>();
+        
     }
 
     void Update()
@@ -19,12 +19,8 @@ public class ObstacleController : MonoBehaviour
     {
         if (collision.transform.GetComponent<BoxController>() && obstacleActive)
         {
+
             obstacleActive = false;
-        }
-        if (collision.transform.GetComponent<CharacterController>() && obstacleActive)
-        {
-            gameController.GameOver();
-            Time.timeScale = 0;
         }
     }
 }

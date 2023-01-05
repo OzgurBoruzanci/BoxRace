@@ -18,7 +18,7 @@ GameObject:
   m_TagString: NextLevel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5190800109356463636
 Transform:
@@ -124,7 +124,7 @@ GameObject:
   m_TagString: NextLevel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7684303326156460873
 Transform:
@@ -230,7 +230,7 @@ GameObject:
   m_TagString: NextLevel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1211892956259595073
 Transform:
@@ -336,7 +336,7 @@ GameObject:
   m_TagString: NextLevel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2634383345970134529
 Transform:
@@ -442,7 +442,7 @@ GameObject:
   m_TagString: NextLevel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4060340943041611151
 Transform:
@@ -548,7 +548,7 @@ GameObject:
   m_TagString: NextLevel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &649605924456712090
 Transform:
@@ -646,11 +646,11 @@ GameObject:
   m_Component:
   - component: {fileID: 5794657275891563776}
   m_Layer: 0
-  m_Name: LevelController
+  m_Name: VictorySteps
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5794657275891563776
 Transform:
@@ -690,7 +690,7 @@ GameObject:
   m_TagString: NextLevel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5794657276301359082
 Transform:
@@ -737,7 +737,7 @@ GameObject:
   m_TagString: NextLevel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &8323491100566892933
 Transform:
@@ -843,7 +843,7 @@ GameObject:
   m_TagString: NextLevel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2610014480729602616
 Transform:

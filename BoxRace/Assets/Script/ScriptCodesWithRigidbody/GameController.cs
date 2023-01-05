@@ -6,12 +6,13 @@ using UnityEngine.UIElements;
 
 public class GameController : MonoBehaviour
 {
-    public GameObject levelController;
+    public GameObject levelCanvas;
     LevelControl levelControl;
 
     void Start()
     {
-        levelControl = levelController.GetComponent<LevelControl>();
+        levelControl = levelCanvas.GetComponent<LevelControl>();
+        PlayerPrefs.SetInt("Record", int.Parse(SceneManager.GetActiveScene().name));
     }
 
     public void NextLevel()
