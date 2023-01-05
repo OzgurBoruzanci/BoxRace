@@ -25,9 +25,14 @@ public class MenuControl : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene(PlayerPrefs.GetInt("Record"));
-            
+            canvas.transform.GetChild(0).gameObject.SetActive(false);
+            canvas.transform.GetChild(2).gameObject.SetActive(true);
+
         }
+    }
+    public void Continue()
+    {
+        SceneManager.LoadScene(PlayerPrefs.GetInt("Record"));
     }
     public void Exit()
     {
@@ -55,6 +60,10 @@ public class MenuControl : MonoBehaviour
     {
         canvas.transform.GetChild(0).gameObject.SetActive(true);
         canvas.transform.GetChild(1).gameObject.SetActive(false);
+    }
+    public void PlayAgain()
+    {
+        SceneManager.LoadScene("1");
     }
 }
     

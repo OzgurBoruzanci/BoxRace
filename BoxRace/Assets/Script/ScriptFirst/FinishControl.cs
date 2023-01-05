@@ -26,7 +26,7 @@ public class FinishControl : MonoBehaviour
         if (collision.transform.GetComponent<CharacterController>() && canCollision)
         {
             gameController.NextLevel();
-            collision.transform.parent.transform.GetComponent<CharacterMoveController>().speed = 0.1f;
+            collision.transform.parent.transform.GetComponent<CharacterMoveController>().speed = 0;
         }
     }
 

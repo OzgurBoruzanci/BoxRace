@@ -37,7 +37,6 @@ public class LevelControl : MonoBehaviour
             gameOverCounter += 0.01f;
             gameOverText.text = "GAME OVER";
             menuTime += Time.deltaTime;
-            Debug.Log(menuTime);
             if (menuTime > 1.3f)
             {
                 SceneManager.LoadScene("Menu");
