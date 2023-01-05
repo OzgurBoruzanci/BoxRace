@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class MenuControl : MonoBehaviour
 {
-    public GameObject menuCube;
 
     void Start()
     {
@@ -14,7 +13,6 @@ public class MenuControl : MonoBehaviour
     }
     private void Update()
     {
-        menuCube.transform.Rotate(2, 2, 2);
     }
     public void Play()
     {
