@@ -13,9 +13,16 @@ public class MenuControl : MonoBehaviour
     {
         recordint = PlayerPrefs.GetInt("Record");
         canvas = GameObject.Find("Canvas");
+
+        for (int i = recordint+2 ; i < canvas.transform.GetChild(1).childCount; i++)
+        {
+            canvas.transform.GetChild(1).transform.GetChild(i).GetComponent<UnityEngine.UI.Button>().interactable = false;
+            Debug.Log(recordint);
+        }
     }
     private void Update()
     {
+
     }
     public void Play()
     {
@@ -25,15 +32,15 @@ public class MenuControl : MonoBehaviour
         }
         else
         {
-            canvas.transform.GetChild(0).gameObject.SetActive(false);
-            canvas.transform.GetChild(2).gameObject.SetActive(true);
+            SceneManager.LoadScene(PlayerPrefs.GetInt("Record"));
 
         }
     }
-    public void Continue()
+    public void Restart()
     {
-        SceneManager.LoadScene(PlayerPrefs.GetInt("Record"));
+        PlayerPrefs.SetInt("Record", 0);
     }
+    
     public void Exit()
     {
         Application.Quit();
