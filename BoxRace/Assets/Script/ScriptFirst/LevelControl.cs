@@ -15,12 +15,28 @@ public class LevelControl : MonoBehaviour
     public Text nextLevelText;
     float menuTime = 0;
     float gameOverCounter = 0;
+    bool speedBool;
     int nextScene = 0;
-    CharacterMoveController moveController;
+    int recordint;
+
+    private void OnEnable()
+    {
+        EventManager.SpeedRegulation += SpeedRegulation;
+        EventManager.GameOverControl += GameOverControl;
+        EventManager.NextLevelControl += NextLevelControl;
+    }
+    private void OnDisable()
+    {
+        EventManager.SpeedRegulation -= SpeedRegulation;
+        EventManager.GameOverControl -= GameOverControl;
+        EventManager.NextLevelControl -= NextLevelControl;
+    }
+
     void Start()
     {
         levelText.text = "Level " + SceneManager.GetActiveScene().name;
-        moveController=FindObjectOfType<CharacterMoveController>();
+        PlayerPrefs.SetInt("Record", int.Parse(SceneManager.GetActiveScene().name));
+        recordint = PlayerPrefs.GetInt("Record");
     }
 
     
@@ -28,12 +44,29 @@ public class LevelControl : MonoBehaviour
     {
         
     }
+    void SpeedRegulation()
+    {
+        speedBool = true;
+    }
+    void GameOverControl()
+    {
+        gameOverControl = true;
+    }
+    void NextLevelControl()
+    {
+        nextLevelControl = true;
+        if (recordint == 3)
+        {
+            PlayerPrefs.SetInt("Record", 0);
+        }
+    }
+
 
     private void FixedUpdate()
     {
         if (gameOverControl == true)
         {
-            moveController.speed = 0;
+            EventManager.SpeedRegulation();
             gameOverCounter += 0.01f;
             gameOverText.text = "GAME OVER";
             menuTime += Time.deltaTime;
@@ -44,6 +77,7 @@ public class LevelControl : MonoBehaviour
         }
         if (nextLevelControl == true)
         {
+            EventManager.SpeedRegulation();
             Time.timeScale = 0.4f;
             menuTime += Time.deltaTime;
             nextLevelText.text = "COMPLETED";

@@ -5,17 +5,31 @@ using UnityEngine;
 public class CharacterController : MonoBehaviour
 {
     public List<GameObject> boxs;
-    GameController gameController;
+    //GameController gameController;
     void Start()
     {
         boxs = new List<GameObject>();
-        gameController = FindObjectOfType<GameController>();
+        //gameController = FindObjectOfType<GameController>();
+    }
+    private void OnEnable()
+    {
+        EventManager.NextLevelControl += NextLevelControl;
+        EventManager.GameOverControl += GameOverControl;
     }
 
-    
     void Update()
     {
-        
+        EventManager.NextLevelControl -= NextLevelControl;
+        EventManager.GameOverControl -= GameOverControl;
+    }
+
+    void NextLevelControl()
+    {
+
+    }
+    void GameOverControl()
+    {
+
     }
 
     public void CollisionWithBox(BoxController box)
@@ -36,12 +50,12 @@ public class CharacterController : MonoBehaviour
     {
         if (collision.gameObject.tag=="NextLevel")
         {
-            gameController.NextLevel();
+            EventManager.NextLevelControl();
             this.transform.parent.transform.GetComponent<CharacterMoveController>().speed = 0.01f;
         }
         if (collision.transform.GetComponent<ObstacleController>() && collision.transform.GetComponent<ObstacleController>().obstacleActive)
         {
-            gameController.GameOver();
+            EventManager.GameOverControl();
         }
     }
 }

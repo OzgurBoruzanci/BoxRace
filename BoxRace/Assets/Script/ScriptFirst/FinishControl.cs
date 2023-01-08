@@ -6,15 +6,25 @@ using UnityEngine.SceneManagement;
 
 public class FinishControl : MonoBehaviour
 {
-    GameController gameController;
+    //GameController gameController;
     bool canCollision=true;
     
     void Start()
     {
-        gameController = FindObjectOfType<GameController>();
+        //gameController = FindObjectOfType<GameController>();
     }
+    private void OnEnable()
+    {
+        EventManager.NextLevelControl += NextLevelControl;
+    }
+    private void OnDisable()
+    {
+        EventManager.NextLevelControl += NextLevelControl;
+    }
+    void NextLevelControl()
+    {
 
-
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -25,8 +35,8 @@ public class FinishControl : MonoBehaviour
         }
         if (collision.transform.GetComponent<CharacterController>() && canCollision)
         {
-            gameController.NextLevel();
-            collision.transform.parent.transform.GetComponent<CharacterMoveController>().speed = 0;
+            EventManager.NextLevelControl();
+            //collision.transform.parent.transform.GetComponent<CharacterMoveController>().speed = 0;
         }
     }
 

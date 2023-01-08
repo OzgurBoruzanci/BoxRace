@@ -6,8 +6,9 @@ public class CharacterMoveController : MonoBehaviour
 {
     float horizontal = 0;
     float placeWidth = 2;
-    public float speed = 1.5f;
+    public float speed;
     //float placeLenght = 40;
+    bool speedStop;
 
     //public GameObject place;
     void Start()
@@ -16,7 +17,29 @@ public class CharacterMoveController : MonoBehaviour
         //placeWidth = place.GetComponent<Collider>().bounds.size.x / 2;
         //placeLenght = place.GetComponent<Collider>().bounds.size.z / 2;
     }
-
+    private void OnEnable()
+    {
+        EventManager.SpeedRegulation += SpeedRegulation;
+    }
+    private void OnDisable()
+    {
+        EventManager.SpeedRegulation -= SpeedRegulation;
+    }
+    void SpeedRegulation()
+    {
+        speedStop = true;
+    }
+    float SpeedStop()
+    {
+        if (speedStop==true)
+        {
+            return speed = 0;
+        }
+        else
+        {
+            return speed = 1.5f;
+        }
+    }
 
     void Update()
     {
@@ -41,9 +64,10 @@ public class CharacterMoveController : MonoBehaviour
     void MouseControl()
     {
         horizontal = Input.GetAxis("Mouse X");
-        Vector3 vec = new Vector3(horizontal, 0, speed);
+        Vector3 vec = new Vector3(horizontal, 0, SpeedStop());
         vec = transform.TransformDirection(vec);
         vec.Normalize();
         transform.position += vec * Time.deltaTime * 5f;
     }
+    
 }
