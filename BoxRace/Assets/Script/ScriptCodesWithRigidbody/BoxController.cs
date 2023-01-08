@@ -6,46 +6,65 @@ public class BoxController : MonoBehaviour
 {
     public bool canCollectable=true;
     //public GameObject player;
-    GameController gameController;
-    CharacterController characterController;
+    
     bool collected;
     void Start()
     {
-        characterController=FindObjectOfType<CharacterController>();
-        gameController = FindObjectOfType<GameController>();
+
+    }
+    private void OnEnable()
+    {
+        EventManager.Boxcollided += Boxcollided;
+        EventManager.BoxcollidedToObstacle += BoxcollidedToObstacle;
+    }
+    private void OnDisable()
+    {
+        EventManager.Boxcollided -= Boxcollided;
+        EventManager.BoxcollidedToObstacle -= BoxcollidedToObstacle;
+    }
+    void BoxcollidedToObstacle(GameObject box)
+    {
+        box.transform.parent = null;
+    }
+    void Boxcollided(BoxController box)
+    {
+
     }
 
-    
     void Update()
     {
         
     }
-    public void Removed(GameObject box)
-    {
-        transform.parent=null;
-        characterController.boxs.Remove(box);
-    }
+    //public void Removed(GameObject box)
+    //{
+    //    transform.parent=null;
+    //    characterController.boxs.Remove(box);
+    //}
 
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.GetComponent<CharacterController>() && !collected && canCollectable)
         {
-            characterController.CollisionWithBox(this.gameObject.GetComponent<BoxController>());
-            characterController.CollisionWithBoxPosition();
+            EventManager.Boxcollided(this.gameObject.GetComponent<BoxController>());
+            //characterController.CollisionWithBox(this.gameObject.GetComponent<BoxController>());
+            //characterController.CollisionWithBoxPosition();
             canCollectable = false;
             collected = true;
         }
         if (collision.transform.GetComponent<BoxController>() && collected && collision.transform.GetComponent<BoxController>().canCollectable)
         {
-            characterController.CollisionWithBox(collision.transform.GetComponent<BoxController>());
-            characterController.CollisionWithBoxPosition();
+            EventManager.Boxcollided(collision.transform.GetComponent<BoxController>());
+            //characterController.CollisionWithBox(collision.transform.GetComponent<BoxController>());
+            //characterController.CollisionWithBoxPosition();
             collision.transform.GetComponent<BoxController>().canCollectable = false;
             collision.transform.GetComponent<BoxController>().collected = true;
         }
         if (collision.transform.GetComponent<ObstacleController>() && collision.transform.GetComponent<ObstacleController>().obstacleActive==true)
         {
-            Removed(this.gameObject);
+            //Removed(this.gameObject);
+            EventManager.BoxcollidedToObstacle(this.gameObject);
+            //transform.parent = null;
         }
         
     }

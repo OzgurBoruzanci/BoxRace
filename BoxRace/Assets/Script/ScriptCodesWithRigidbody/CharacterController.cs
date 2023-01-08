@@ -15,14 +15,30 @@ public class CharacterController : MonoBehaviour
     {
         EventManager.NextLevelControl += NextLevelControl;
         EventManager.GameOverControl += GameOverControl;
+        EventManager.Boxcollided += Boxcollided;
+        EventManager.BoxcollidedToObstacle += BoxcollidedToObstacle;
+    }
+    private void OnDisable()
+    {
+        EventManager.NextLevelControl -= NextLevelControl;
+        EventManager.GameOverControl -= GameOverControl;
+        EventManager.Boxcollided -= Boxcollided;
+        EventManager.BoxcollidedToObstacle -= BoxcollidedToObstacle;
     }
 
     void Update()
     {
-        EventManager.NextLevelControl -= NextLevelControl;
-        EventManager.GameOverControl -= GameOverControl;
+        
     }
-
+    void BoxcollidedToObstacle(GameObject box)
+    {
+        boxs.Remove(box);
+    }
+    void Boxcollided(BoxController box)
+    {
+        CollisionWithBox(box);
+        CollisionWithBoxPosition();
+    }
     void NextLevelControl()
     {
 
@@ -51,11 +67,10 @@ public class CharacterController : MonoBehaviour
         if (collision.gameObject.tag=="NextLevel")
         {
             EventManager.NextLevelControl();
-            this.transform.parent.transform.GetComponent<CharacterMoveController>().speed = 0.01f;
         }
         if (collision.transform.GetComponent<ObstacleController>() && collision.transform.GetComponent<ObstacleController>().obstacleActive)
         {
-            EventManager.GameOverControl();
+            EventManager.GameOverControl(); 
         }
     }
 }

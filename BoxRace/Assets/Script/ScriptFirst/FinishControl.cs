@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,10 +17,16 @@ public class FinishControl : MonoBehaviour
     private void OnEnable()
     {
         EventManager.NextLevelControl += NextLevelControl;
+        EventManager.BoxcollidedToObstacle += BoxcollidedToObstacle;
     }
     private void OnDisable()
     {
         EventManager.NextLevelControl += NextLevelControl;
+        EventManager.BoxcollidedToObstacle -= BoxcollidedToObstacle;
+    }
+    void BoxcollidedToObstacle(GameObject box)
+    {
+
     }
     void NextLevelControl()
     {
@@ -30,7 +37,8 @@ public class FinishControl : MonoBehaviour
     {
         if (collision.transform.GetComponent<BoxController>() && canCollision)
         {
-            collision.transform.GetComponent<BoxController>().Removed(collision.gameObject);
+            //collision.transform.GetComponent<BoxController>().Removed(collision.gameObject);
+            EventManager.BoxcollidedToObstacle(collision.gameObject);
             canCollision = false;
         }
         if (collision.transform.GetComponent<CharacterController>() && canCollision)
