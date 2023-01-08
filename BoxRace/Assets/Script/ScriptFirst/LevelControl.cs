@@ -13,6 +13,7 @@ public class LevelControl : MonoBehaviour
     public Text levelText;
     public Text gameOverText;
     public Text nextLevelText;
+    public Text pointText;
     float menuTime = 0;
     float gameOverCounter = 0;
     bool speedBool;
@@ -24,12 +25,14 @@ public class LevelControl : MonoBehaviour
         EventManager.SpeedRegulation += SpeedRegulation;
         EventManager.GameOverControl += GameOverControl;
         EventManager.NextLevelControl += NextLevelControl;
+        EventManager.Point += Point;
     }
     private void OnDisable()
     {
         EventManager.SpeedRegulation -= SpeedRegulation;
         EventManager.GameOverControl -= GameOverControl;
         EventManager.NextLevelControl -= NextLevelControl;
+        EventManager.Point -= Point;
     }
 
     void Start()
@@ -43,6 +46,11 @@ public class LevelControl : MonoBehaviour
     void Update()
     {
         
+    }
+    void Point(int point)
+    {
+        point *= 5;
+        pointText.text = "POİNT : " + point;
     }
     void SpeedRegulation()
     {

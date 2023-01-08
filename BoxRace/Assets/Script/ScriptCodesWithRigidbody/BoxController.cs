@@ -7,10 +7,11 @@ public class BoxController : MonoBehaviour
     public bool canCollectable=true;
     //public GameObject player;
     
+
     bool collected;
     void Start()
     {
-
+        
     }
     private void OnEnable()
     {
@@ -22,6 +23,7 @@ public class BoxController : MonoBehaviour
         EventManager.Boxcollided -= Boxcollided;
         EventManager.BoxcollidedToObstacle -= BoxcollidedToObstacle;
     }
+
     void BoxcollidedToObstacle(GameObject box)
     {
         box.transform.parent = null;

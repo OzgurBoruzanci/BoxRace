@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class CharacterController : MonoBehaviour
 {
@@ -30,6 +31,7 @@ public class CharacterController : MonoBehaviour
     {
         
     }
+    
     void BoxcollidedToObstacle(GameObject box)
     {
         boxs.Remove(box);
