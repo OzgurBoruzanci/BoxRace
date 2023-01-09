@@ -16,8 +16,6 @@ public class LevelControl : MonoBehaviour
     public Text nextLevelText;
     public Text pointText;
     float menuTime = 0;
-    float gameOverCounter = 0;
-    bool speedBool;
     int nextScene = 0;
     int recordint;
 
@@ -56,11 +54,16 @@ public class LevelControl : MonoBehaviour
     }
     void SpeedRegulation()
     {
-        speedBool = true;
+        
     }
     void GameOverControl()
     {
         gameOverControl = true;
+        if (gameOverControl == true)
+        {
+            EventManager.SpeedRegulation();
+            gameOverText.text = "GAME OVER";
+        }
     }
     void NextLevelControl()
     {
@@ -69,15 +72,18 @@ public class LevelControl : MonoBehaviour
         {
             PlayerPrefs.SetInt("Record", 0);
         }
+        if (nextLevelControl == true)
+        {
+            EventManager.SpeedRegulation();
+            Time.timeScale = 0.4f;
+            nextLevelText.text = "COMPLETED";
+        }
     }
 
     private void FixedUpdate()
     {
         if (gameOverControl == true)
         {
-            EventManager.SpeedRegulation();
-            gameOverCounter += 0.01f;
-            gameOverText.text = "GAME OVER";
             menuTime += Time.deltaTime;
             if (menuTime > 1.3f)
             {
@@ -86,10 +92,7 @@ public class LevelControl : MonoBehaviour
         }
         if (nextLevelControl == true)
         {
-            EventManager.SpeedRegulation();
-            Time.timeScale = 0.4f;
             menuTime += Time.deltaTime;
-            nextLevelText.text = "COMPLETED";
             if (menuTime > 1.3f)
             {
                 nextScene = int.Parse(SceneManager.GetActiveScene().name) + 1;
