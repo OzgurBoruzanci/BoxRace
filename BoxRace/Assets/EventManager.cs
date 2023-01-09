@@ -9,5 +9,5 @@ public static class EventManager
     public static Action SpeedRegulation;
     public static Action GameOverControl;
     public static Action NextLevelControl;
-    public static Action<int> Point;
+    public static Action<GameObject> Point;
 }

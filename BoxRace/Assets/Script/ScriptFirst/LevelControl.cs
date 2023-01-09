@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -7,7 +8,7 @@ using UnityEngine.UI;
 
 public class LevelControl : MonoBehaviour
 {
-
+    List<GameObject> pointList;
     public bool gameOverControl = false;
     public bool nextLevelControl = false;
     public Text levelText;
@@ -40,6 +41,7 @@ public class LevelControl : MonoBehaviour
         levelText.text = "Level " + SceneManager.GetActiveScene().name;
         PlayerPrefs.SetInt("Record", int.Parse(SceneManager.GetActiveScene().name));
         recordint = PlayerPrefs.GetInt("Record");
+        pointList=new List<GameObject>();
     }
 
     
@@ -47,10 +49,10 @@ public class LevelControl : MonoBehaviour
     {
         
     }
-    void Point(int point)
+    void Point(GameObject box)
     {
-        point *= 5;
-        pointText.text = "POİNT : " + point;
+        pointList.Add(box);
+        pointText.text = "POİNT : "+(pointList.Count*5);
     }
     void SpeedRegulation()
     {
@@ -68,7 +70,6 @@ public class LevelControl : MonoBehaviour
             PlayerPrefs.SetInt("Record", 0);
         }
     }
-
 
     private void FixedUpdate()
     {

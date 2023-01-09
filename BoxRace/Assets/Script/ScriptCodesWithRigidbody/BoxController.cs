@@ -17,11 +17,18 @@ public class BoxController : MonoBehaviour
     {
         EventManager.Boxcollided += Boxcollided;
         EventManager.BoxcollidedToObstacle += BoxcollidedToObstacle;
+        EventManager.Point += Point;
     }
     private void OnDisable()
     {
         EventManager.Boxcollided -= Boxcollided;
         EventManager.BoxcollidedToObstacle -= BoxcollidedToObstacle;
+        EventManager.Point -= Point;
+    }
+
+    void Point(GameObject box)
+    {
+
     }
 
     void BoxcollidedToObstacle(GameObject box)
@@ -53,6 +60,7 @@ public class BoxController : MonoBehaviour
             //characterController.CollisionWithBoxPosition();
             canCollectable = false;
             collected = true;
+            EventManager.Point(this.gameObject);
         }
         if (collision.transform.GetComponent<BoxController>() && collected && collision.transform.GetComponent<BoxController>().canCollectable)
         {
@@ -61,6 +69,7 @@ public class BoxController : MonoBehaviour
             //characterController.CollisionWithBoxPosition();
             collision.transform.GetComponent<BoxController>().canCollectable = false;
             collision.transform.GetComponent<BoxController>().collected = true;
+            EventManager.Point(collision.gameObject);
         }
         if (collision.transform.GetComponent<ObstacleController>() && collision.transform.GetComponent<ObstacleController>().obstacleActive==true)
         {

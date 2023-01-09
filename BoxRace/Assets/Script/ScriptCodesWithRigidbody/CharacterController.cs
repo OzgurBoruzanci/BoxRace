@@ -31,7 +31,7 @@ public class CharacterController : MonoBehaviour
     {
         
     }
-    
+
     void BoxcollidedToObstacle(GameObject box)
     {
         boxs.Remove(box);
